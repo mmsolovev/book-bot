@@ -19,7 +19,7 @@ router: Router = Router()
 # и отправлять ему приветственное сообщение
 @router.message(CommandStart)
 async def process_start_command(message: Message):
-    await message.answer(LEXICON['/start'])
+    await message.answer(LEXICON[message.text])
     if message.from_user.id not in users_db:
         users_db[message.from_user.id] = deepcopy(user_dict_template)
 
@@ -28,7 +28,7 @@ async def process_start_command(message: Message):
 # и отправлять пользователю сообщение со списком доступных команд в боте
 @router.message(Command(commands='help'))
 async def process_help_command(message: Message):
-    await message.answer(LEXICON['/help'])
+    await message.answer(LEXICON[message.text])
 
 
 # Этот хэндлер будет срабатывать на команду "/beginning"
